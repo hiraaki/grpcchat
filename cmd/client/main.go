@@ -20,9 +20,15 @@ func main() {
 
 	c := chat.NewChatServiceClient(conn)
 
-	response, err := c.SayHello(context.Background(), &chat.Message{Body: "Hello From Client!"})
+	response, err := c.SayHello(context.Background(), &chat.Message{Client: "eco", Body: "Hello From Client!"})
 	if err != nil {
 		log.Fatalf("Error when calling SayHello: %s", err)
+	}
+	log.Printf("Response from server: %s", response.Body)
+
+	response, err = c.BroadcastMessage(context.Background(), &chat.Message{Client: "eco", Body: "Hello From Client!"})
+	if err != nil {
+		log.Fatalf("Error when calling BroadcastMessage: %s", err)
 	}
 	log.Printf("Response from server: %s", response.Body)
 

@@ -2,11 +2,12 @@ syntax = "proto3";
 option go_package = "./pb";
 
 message Message {
-  string body = 1;
+  string client = 1;
+  string body = 2;
 }
-
 
 service ChatService {
   rpc SayHello(Message) returns (Message) {}
+  rpc BroadcastMessage (Message) returns (Message){}
 }
 
